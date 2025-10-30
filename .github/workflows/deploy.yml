@@ -37,7 +37,7 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SERVER_USER }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /opt/laravel
