@@ -13,14 +13,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
-        
-      - name: Sync to web root
-        run: |
-          rsync -av --delete \
-            --exclude='.git' \
-            --exclude='.github' \
-            ./* "D:/laragon/www/"
-        shell: bash
+        with:
+          path: D:/laragon/www/onlyOffice
+          clean: false
 
       - name: Composer Install
         run: composer install --no-dev --optimize-autoloader
