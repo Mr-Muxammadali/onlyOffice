@@ -14,12 +14,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v5
         with:
-          path: .
+          path: 'D:/laragon/www/onlyOffice/'
 
       - name: Composer Install
         run: |
           composer install --no-dev --optimize-autoloader
         shell: cmd
-        working-directory: D:/laragon/www/onlyOffice
+        working-directory: 'D:/laragon/www/onlyOffice'
 
 
