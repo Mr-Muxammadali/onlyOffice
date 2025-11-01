@@ -7,14 +7,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-to-host:
     runs-on: self-hosted
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
         with:
-          path: D:/laragon/www/onlyOffice
+          path: D:\actions-runner\_work\
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
