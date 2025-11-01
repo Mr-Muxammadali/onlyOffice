@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Composer Install
-        run: composer install --no-dev --optimize-autoloader
+        run: |
+          composer install --no-dev --optimize-autoloader
+        shell: cmd
         working-directory: D:/laragon/www/onlyOffice
 
 
