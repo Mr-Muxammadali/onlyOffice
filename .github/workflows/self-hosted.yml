@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
-        with:
-          path: D:\actions-runner\_work\
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
