@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v5
         with:
-          path: ./onlyOffice
+          path: .
 
       - name: Composer Install
         run: |
