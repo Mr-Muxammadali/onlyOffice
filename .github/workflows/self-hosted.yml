@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Move repo to Laragon
-        run: robocopy "C:\actions-runner\_work\onlyOffice\onlyOffice" "D:\laragon\www\onlyOffice" /MIR /COPYALL /R:3 /W:1
+        run: robocopy "C:\actions-runner\_work\onlyOffice\onlyOffice" "D:\laragon\www\onlyOffice" /MIR /R:3 /W:1
         shell: cmd
         
       - name: Composer Install
