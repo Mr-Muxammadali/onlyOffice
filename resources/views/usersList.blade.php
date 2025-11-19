@@ -7,13 +7,14 @@
     <title>Performance</title>
 </head>
 <body>
-<h1>Total users {{$countUsers}}</h1>
+<h1 style="text-align: center">User List From {{$source}} {{count($users)}} of {{$countUsers}} </h1>
 <table class="table table-bordered border-primary">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Pots</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Posts</th>
             <th scope="col">Comments</th>
         </tr>
         </thead>
@@ -22,14 +23,13 @@
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$user->name}}</td>
+                <td>{{$user->balance}}</td>
                 <td>{{$user->posts_count}}</td>
                 <td>{{$user->comments_count}}</td>
             </tr>
         @endforeach
         </tbody>
 </table>
-{{ $users->links() }}
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
