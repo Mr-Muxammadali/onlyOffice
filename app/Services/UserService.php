@@ -2,39 +2,43 @@
 
 namespace App\Services;
 
-use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Cache;
 
 class UserService
 {
-    public function countUsers(): int
+    public function __construct(public UserRepository $repository)
     {
-        return User::all()->count();
+    }
+
+    public function getAll(): LengthAwarePaginator
+    {
+        return $this->repository->getAll();
+    }
+    public function countUsersFromDB(): int
+    {
+        return $this->repository->getCount();
     }
 
     public function getUsersFromDB(): Collection
     {
-        return User::withCount([
-            'posts',
-            'posts as comments_count' => function ($query) {
-                $query->join('comments', 'comments.post_id', '=', 'posts.id');
-            },
-        ])->where('id', '>' ,150)->where('id', '<' , 500)->get();
+            return  $this->repository->getUserList();
     }
 ############## With  cache ################
 
     public function countUsersFromCache(): int
     {
         return Cache::rememberForever('count', function () {
-            return $this->countUsers();
+            return $this->repository->getCount();
         });
     }
 
     public function getUsersFromCache(): Collection
     {
         return Cache::rememberForever('users', function () {
-            return $this->getUsersFromDB();
+            return  $this->repository->getUserList();
         });
     }
 }

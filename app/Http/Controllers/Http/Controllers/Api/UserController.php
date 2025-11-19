@@ -16,18 +16,10 @@ class UserController extends Controller
     /**
      * @return JsonResponse
      */
-    public function countUsers(): JsonResponse
-    {
-        $countUsers = $this->userService->countUsers();
-        return response()->json($countUsers);
-    }
-    /**
-     * @return JsonResponse
-     */
     public function getUsersFromDB(): JsonResponse
     {
         $users = $this->userService->getUsersFromDB();
-        return response()->json($users);
+        return $this->success($users);
     }
     /**
      * @return JsonResponse
@@ -35,6 +27,6 @@ class UserController extends Controller
     public function getUsersFromCache(): JsonResponse
     {
         $users = $this->userService->getUsersFromCache();
-        return response()->json($users);
+        return $this->success($users);
     }
 }

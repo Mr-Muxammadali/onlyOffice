@@ -15,10 +15,20 @@ class UserController extends Controller
     /**
      * @return View
      */
+    public function index(): View
+    {
+        $users = $this->userService->getAll();
+        $countUsers = $this->userService->countUsersFromDB();
+        return view('welcome', compact('countUsers', 'users'));
+    }
+
+    /**
+     * @return View
+     */
     public function getUsersFromDB(): View
     {
-        $countUsers = $this->userService->countUsers();
         $users = $this->userService->getUsersFromDB();
+        $countUsers = $this->userService->countUsersFromDB();
         return view('welcome', compact('countUsers', 'users'));
     }
     /**
@@ -26,8 +36,8 @@ class UserController extends Controller
      */
     public function getUsersFromCache(): View
     {
-        $countUsers = $this->userService->countUsersFromCache();
         $users = $this->userService->getUsersFromCache();
+        $countUsers = $this->userService->countUsersFromCache();
         return view('welcome', compact('countUsers', 'users'));
     }
 }
