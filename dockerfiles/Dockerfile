@@ -18,9 +18,6 @@ RUN apk add --no-cache \
     g++ \
     linux-headers \
     postgresql-dev \
-    && docker-php-ext-install pcntl \
-    && pecl install swoole \
-    && docker-php-ext-enable swoole \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql pdo_pgsql bcmath \
     && apk del autoconf make gcc g++ linux-headers
