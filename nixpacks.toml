@@ -14,5 +14,5 @@ cmds = [
 ]
 
 [start]
-# PHP-FPM ni doppler bilan ishga tushiramiz
-cmd = "doppler run -- php-fpm -F"
+PHP-FPM ni doppler bilan ishga tushiramiz
+# cmd = "doppler run -- php-fpm -F"
