@@ -104,7 +104,7 @@
     </nav>
 
     <div class="card" role="main">
-        <h1 class="main-title">Caching in Laravel</h1>
+        <h1 class="main-title">Caching in Laravel2</h1>
         <p class="subtitle">Performance test</p>
 
         <div class="footer">
