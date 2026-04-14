@@ -19,3 +19,4 @@ RUN curl -fsSL https://raw.githubusercontent.com/Infisical/infisical-cli/main/sc
 
 # IMPORTANT: don't break webdevops runtime
 CMD ["infisical", "run", "--", "supervisord"]
+CMD ["infisical", "run", "--", "php","artisan","serve", "--host=0.0.0.0", "--port=8000"]
