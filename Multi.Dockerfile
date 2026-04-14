@@ -1,61 +1,22 @@
-# =======================
-# 1. Node stage (frontend build)
-# =======================
-FROM node:20-alpine AS node
+FROM webdevops/php-nginx:8.2-alpine
 
-WORKDIR /app
-
-# package fayllarni copy qilamiz
-COPY package*.json ./
-
-RUN npm install
-
-# qolgan kodni copy
-COPY . .
-
-# build (Vite / Mix)
-RUN npm run build
-
-
-# =======================
-# 2. PHP stage (backend)
-# =======================
-FROM php:8.3-fpm-alpine
-
-WORKDIR /var/www/laravel
-
-# Kerakli paketlar
-RUN apk add --no-cache \
-    bash \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    freetype-dev \
-    zip \
-    unzip \
-    postgresql-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_pgsql bcmath gd
+# System deps
+RUN apt-get update && apt-get install -y \
+    git curl unzip libzip-dev \
+    && docker-php-ext-install pdo pdo_mysql zip
 
 # Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Laravel kodini copy qilamiz
+WORKDIR /var/www
+
 COPY . .
 
-# Node build natijasini olib kelamiz
-COPY --from=node /app/public/build ./public/build
+RUN composer install --no-dev --optimize-autoloader
 
-# Laravel optimizatsiya
-RUN composer install --no-dev --optimize-autoloader \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
+# ❗ Infisical binary (eng stabil)
+RUN curl -L https://github.com/Infisical/infisical/releases/latest/download/infisical-linux-amd64 \
+    -o /usr/local/bin/infisical \
+    && chmod +x /usr/local/bin/infisical
 
-# permission
-RUN chown -R www-data:www-data /var/www/laravel
-
-USER www-data
-
-EXPOSE 9000
-
-CMD ["php-fpm"]
+CMD ["sh", "-c", "infisical run -- php-fpm"]
