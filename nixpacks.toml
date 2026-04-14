@@ -3,8 +3,8 @@ nixPkgs = ["php82", "php82Packages.composer", "curl", "bash"]
 
 [phases.install]
 cmds = [
-  "curl -L https://github.com/Infisical/infisical/releases/latest/download/infisical-linux-amd64 -o /usr/local/bin/infisical",
-  "chmod +x /usr/local/bin/infisical",
+  "curl -L https://github.com/Infisical/infisical/releases/latest/download/infisical-linux-amd64 -o /app/infisical",
+  "chmod +x /app/infisical",
   "composer install --no-dev --optimize-autoloader"
 ]
 
