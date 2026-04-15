@@ -1,19 +1,23 @@
 FROM php:8.2-cli
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    git \
-    unzip \
-    libpq-dev \
-    postgresql-client \
+# System deps + postgres
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        git \
+        unzip \
+        libpq-dev \
+        postgresql-client \
+        ca-certificates \
+        gnupg \
     && docker-php-ext-install pdo pdo_pgsql \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Infisical CLI (rasmiy docs bo‘yicha)
-RUN curl -1sLf 'https://artifacts-cli.infisical.com/setup.deb.sh' | bash \
+# Infisical CLI
+RUN curl -fsSL https://artifacts-cli.infisical.com/setup.deb.sh | bash \
     && apt-get update \
-    && apt-get install -y infisical
+    && apt-get install -y infisical \
+    && rm -rf /var/lib/apt/lists/*
 
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
