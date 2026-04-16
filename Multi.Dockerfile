@@ -27,6 +27,5 @@ COPY . .
 #test hook fire o
 
 RUN composer install --no-dev --optimize-autoloader
-#CMD ["infisical", "run", "--", "php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["infisical", "run", "--", "php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
