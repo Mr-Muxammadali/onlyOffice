@@ -24,9 +24,6 @@ COPY --from=vendor-builder /app/vendor /app/vendor
 # 1. Kodni ko'chiramiz
 COPY . .
 
-# 2. Entrypointni to'g'ri joyga o'tkazib, ruxsat beramiz
-RUN chmod +x ./entrypoint.sh
-
 # 3. Ruxsatlarni to'g'rilash
 RUN chown -R application:application /app \
     && chmod -R 775 /app/storage /app/bootstrap/cache
