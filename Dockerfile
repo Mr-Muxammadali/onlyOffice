@@ -26,6 +26,9 @@ WORKDIR /app
 
 # Faqat tayyor vendor'ni ko'chiramiz
 COPY --from=vendor-builder /app/vendor /app/vendor
+
+RUN chmod +x entrypoint.sh
+
 COPY . .
 
 # Ruxsatlarni to'g'rilash
