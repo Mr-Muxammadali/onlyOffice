@@ -1,14 +1,24 @@
-# 1-bosqich: Composer orqali vendor'larni tayyorlab olish
-FROM composer:2 AS vendor-builder
+# 1-bosqich: Vendor-builder
+# PHP-ni aynan o'zingiz ishlatayotgan versiyada (8.3) oling
+FROM php:8.3-alpine AS vendor-builder
+
+# Composer ni yuklash
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Kerakli PHP extension va kutubxonalarni o'rnatish
+RUN apk add --no-cache postgresql-dev libpq git unzip \
+    && docker-php-ext-install pdo pdo_pgsql
+
 WORKDIR /app
 COPY composer.* ./
-# --no-dev faqat production uchun kerakli bo'lganlarini yuklaydi
-RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction
+
+# --ignore-platform-reqs qo'shdik, chunki builder ichida barcha ext-lar bo'lmasligi mumkin
+RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction --ignore-platform-reqs
 
 # 2-bosqich: Yakuniy Image (Runtime)
 FROM webdevops/php-nginx:8.3-alpine
 
-# Kerakli PHP kengaytmalarini o'rnatish
+# Runtime uchun kerakli kutubxonalar
 RUN apk add --no-cache postgresql-dev libpq \
     && docker-php-ext-install pdo pdo_pgsql
 
@@ -18,14 +28,13 @@ WORKDIR /app
 COPY --from=vendor-builder /app/vendor /app/vendor
 COPY . .
 
-# Ruxsatlarni to'g'rilash (Xavfsizlik uchun)
+# Ruxsatlarni to'g'rilash
 RUN chown -R application:application /app \
     && chmod -R 775 /app/storage /app/bootstrap/cache
 
 ENV WEB_DOCUMENT_ROOT=/app/public
 
-# Infisical CLI container ichida yo'q, u hostdan volume orqali ulanadi.
-# Shu sababli, biz entrypointni shunchaki infisical buyrug'i bilan boshlaymiz.
+# Entrypoint
 ENTRYPOINT ["infisical", "run", "--", "/entrypoint.sh"]
 
 EXPOSE 80
