@@ -11,4 +11,4 @@ services:
           - INFISICAL_DISABLE_LOGGING=${INFISICAL_DISABLE_LOGGING}
           - INFISICAL_LOG_LEVEL=${INFISICAL_LOG_LEVEL}
     # Mana bu yerda ENTRYPOINT ni composega ko'chirdik
-entrypoint: ["infisical", "run", "--", "/usr/local/bin/entrypoint.sh"]
+entrypoint: ["infisical", "run", "--", "/app/entrypoint.sh"]
