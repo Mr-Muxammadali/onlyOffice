@@ -3,3 +3,8 @@ services:
     build: .
     volumes:
       - /usr/bin/infisical:/usr/bin/infisical:ro
+    environment:
+          - INFISICAL_TOKEN=${INFISICAL_TOKEN}
+          - INFISICAL_PROJECT_ID=${INFISICAL_PROJECT_ID}
+    # Mana bu yerda ENTRYPOINT ni composega ko'chirdik
+    entrypoint: ["infisical", "run", "--", "entrypoint.sh"]
