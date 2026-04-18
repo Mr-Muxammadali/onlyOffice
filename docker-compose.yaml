@@ -1,3 +1,5 @@
 services:
   app:
     build: .
+    volumes:
+      - /usr/bin/infisical:/usr/bin/infisical:ro
