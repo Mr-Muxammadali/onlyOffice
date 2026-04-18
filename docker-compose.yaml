@@ -6,5 +6,9 @@ services:
     environment:
           - INFISICAL_TOKEN=${INFISICAL_TOKEN}
           - INFISICAL_PROJECT_ID=${INFISICAL_PROJECT_ID}
+          - INFISICAL_ENVIRONMENT=${INFISICAL_ENVIRONMENT}
+          - INFISICAL_API_URL=${INFISICAL_API_URL}
+          - INFISICAL_DISABLE_LOGGING=${INFISICAL_DISABLE_LOGGING}
+          - INFISICAL_LOG_LEVEL=${INFISICAL_LOG_LEVEL}
     # Mana bu yerda ENTRYPOINT ni composega ko'chirdik
     entrypoint: ["infisical", "run", "--", "entrypoint.sh"]
