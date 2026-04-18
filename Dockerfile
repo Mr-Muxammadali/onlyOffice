@@ -25,8 +25,7 @@ COPY --from=vendor-builder /app/vendor /app/vendor
 COPY . .
 
 # 2. Entrypointni to'g'ri joyga o'tkazib, ruxsat beramiz
-RUN mv entrypoint.sh /usr/local/bin/entrypoint.sh && \
-    chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 # 3. Ruxsatlarni to'g'rilash
 RUN chown -R application:application /app \
