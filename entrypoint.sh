@@ -10,4 +10,4 @@ php artisan optimize:clear
 echo "Starting application..."
 # Webdevops imeyjining asl entrypoint fayli ildiz papkada joylashgan
 # Shuning uchun oldiga "/" qo'yish shart
-exec /entrypoint.sh
+exec /app/entrypoint.sh
