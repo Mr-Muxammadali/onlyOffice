@@ -35,6 +35,6 @@ RUN chown -R application:application /app \
 ENV WEB_DOCUMENT_ROOT=/app/public
 
 # Entrypoint
-ENTRYPOINT ["infisical", "run", "--", "/entrypoint.sh"]
+ENTRYPOINT ["infisical", "run", "--", "entrypoint.sh"]
 
 EXPOSE 80
