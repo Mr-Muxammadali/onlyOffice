@@ -9,4 +9,4 @@ php artisan optimize:clear
 
 echo "Starting application..."
 # Webdevops imeyjining asl entrypointini chaqiramiz
-exec /entrypoint.sh
+exec entrypoint.sh
