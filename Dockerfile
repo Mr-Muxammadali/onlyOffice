@@ -17,6 +17,9 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
+RUN chown -R application:application /app \
+    && chmod -R 775 /app/storage /app/bootstrap/cache
+    
 ENV WEB_DOCUMENT_ROOT=/app/public
 
 EXPOSE 80
