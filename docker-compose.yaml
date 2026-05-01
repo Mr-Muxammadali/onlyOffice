@@ -6,8 +6,6 @@ volumes:
   - /usr/bin/infisical:/usr/bin/infisical:ro
 command: >
   sh -c "infisical run -- sh -c '
-    echo \"DB USER: $DB_USERNAME\" &&
-    echo \"DB PASS: $DB_PASSWORD\" &&
     php artisan config:clear && 
     php artisan config:cache && 
     php artisan optimize:clear && 
