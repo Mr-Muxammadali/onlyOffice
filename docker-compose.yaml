@@ -2,14 +2,15 @@ services:
   app:
     build: .
 
-volumes: 
-  - /usr/bin/infisical:/usr/bin/infisical:ro
-command: >
-  sh -c "infisical run -- sh -c '
-    php artisan config:clear && 
-    php artisan config:cache && 
-    php artisan optimize:clear && 
-    php artisan migrate --force --isolated && 
-    php-fpm -D && 
-    nginx -g \"daemon off;\"
-  '"
+    volumes: 
+      - /usr/bin/infisical:/usr/bin/infisical:ro
+    command: >
+      sh -c "infisical run -- sh -c '
+        php artisan config:clear && 
+        php artisan config:cache && 
+        php artisan optimize:clear && 
+        php artisan migrate --force --isolated && 
+        env | grep DB_ &&
+        php-fpm -D && 
+        nginx -g \"daemon off;\"
+      '"
