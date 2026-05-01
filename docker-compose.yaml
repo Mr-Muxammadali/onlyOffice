@@ -1,24 +1,4 @@
 services:
   app:
     build: .
-    volumes:
-      - /usr/bin/infisical:/usr/bin/infisical:ro
-    environment:
-      - INFISICAL_TOKEN=${INFISICAL_TOKEN}
-      - INFISICAL_PROJECT_ID=${INFISICAL_PROJECT_ID}
-      - INFISICAL_ENVIRONMENT=${INFISICAL_ENVIRONMENT}
-      - INFISICAL_API_URL=${INFISICAL_API_URL}
-      - INFISICAL_DISABLE_LOGGING=${INFISICAL_DISABLE_LOGGING}
-      - INFISICAL_LOG_LEVEL=${INFISICAL_LOG_LEVEL}
-    # Mana bu yerda ENTRYPOINT ni composega ko'chirdik
-    command: >
-          sh -c "infisical run -- sh -c '
-            echo \"DB USER: $DB_USERNAME\" &&
-            echo \"DB PASS: $DB_PASSWORD\" &&
-            php artisan config:clear && 
-            php artisan config:cache && 
-            php artisan optimize:clear && 
-            php artisan migrate --force --isolated && 
-            php-fpm -D && 
-            nginx -g \"daemon off;\"
-          '"
+
