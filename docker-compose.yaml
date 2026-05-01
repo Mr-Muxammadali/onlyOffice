@@ -10,7 +10,6 @@ command: >
     php artisan config:cache && 
     php artisan optimize:clear && 
     php artisan migrate --force --isolated && 
-    env | grep DB_ &&
     php-fpm -D && 
     nginx -g \"daemon off;\"
   '"
