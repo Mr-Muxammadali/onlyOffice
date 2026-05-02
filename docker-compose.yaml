@@ -4,6 +4,13 @@ services:
 
     volumes: 
       - /usr/bin/infisical:/usr/bin/infisical:ro
+    environment:
+      - INFISICAL_TOKEN=${INFISICAL_TOKEN} 
+      - INFISICAL_PROJECT_ID=${INFISICAL_PROJECT_ID} 
+      - INFISICAL_ENVIRONMENT=${INFISICAL_ENVIRONMENT} 
+      - INFISICAL_API_URL=${INFISICAL_API_URL} 
+      - INFISICAL_DISABLE_LOGGING=${INFISICAL_DISABLE_LOGGING} 
+      - INFISICAL_LOG_LEVEL=${INFISICAL_LOG_LEVEL}
     command: >
       sh -c "infisical run -- sh -c '
         php artisan config:clear && 
